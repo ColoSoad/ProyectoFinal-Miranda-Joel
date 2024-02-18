@@ -1,0 +1,390 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,600;0,700;1,100;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css');
+
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+    font-family: 'AgencyFB', 'Courier New', Courier, monospace;
+}
+
+
+select {
+    background: none !important;
+}
+
+select:focus {
+    color: #000 !important;
+    border-color: #000 !important;
+    outline: 0;
+}
+
+select {
+    background-color: transparent;
+    border: 0.1rem solid #d1d1d1;
+    border-radius: .4rem;
+    box-shadow: none;
+    box-sizing: inherit;
+    height: 3.8rem;
+    padding: .6rem 1.0rem .7rem;
+    width: 100%;
+    color: #000 !important;
+}
+
+.grad{
+    background-color: #2A3A47 !important;
+}
+
+.subir {
+    height: 40px;
+    width: 40px;
+    color: #000;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+}
+  
+.subir:hover {
+    color: rgb(100, 100, 198);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: rgb(234, 227, 225) !important;
+}
+
+.logos{
+    text-align: center;
+    padding: 30px;
+    background-color: rgb(234, 227, 225) !important;
+}
+
+.logoHogar{
+    padding: 0px 0 0 10px;
+    height: 180px;
+}
+
+.logoPrestamo{
+    padding: 15px 0 0 0;
+    height: 180px;
+}
+.navbar{
+    background-color: rgb(234, 227, 225) !important;;
+    text-align: center !important;
+}
+.nav-link:hover{
+    color: rgb(100, 100, 198)!important;
+}
+
+.textoNavbar{
+    font-size: 25px;
+    text-align: center !important;
+
+}
+
+.logoAutos{
+    height: 180px;
+}
+
+
+html {
+    min-height: 100%;
+    background-color: rgb(234, 227, 225) !important;
+}
+
+.btnCalcularYCotizar {
+    text-align: center;
+}
+
+h1 {
+    font-weight: 400;
+    color: #262525;
+}
+
+.textos2{
+    font-weight: 900;
+    color: rgb(100, 100, 198);
+}
+
+label, .textos {
+    font-weight: 700;
+    color: #262525;
+}
+
+.barra-navegacion{
+    text-align: center;
+    padding: 30px 0 0 0;
+}
+
+a{
+    color: #262525;
+    font-weight: 600;
+}
+
+a:hover{
+    color : rgb(100, 100, 198);
+}
+
+.inicio{
+    padding: 15px;
+}
+
+.div-father{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(234, 227, 225) !important;
+}
+
+.div-cotizador {
+    width: 1200px;
+    background-color: rgb(234, 227, 225) !important;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 30px;
+    border-color: rgb(73, 70, 70);
+    box-shadow: 26px 28px 15px -4px rgba(0,0,0,0.15);
+    border-radius: 0.7rem;
+}
+
+select, input, option {
+    min-width: 50% !important;
+    width: 70% !important;
+    border-color: rgb(73, 70, 70) !important;
+    box-shadow: 26px 28px 15px -16px rgba(0,0,0,0.15) !important;
+    background-color: rgb(234, 227, 225) !important;
+}
+
+.separador {
+    margin: 20px;
+}
+
+.button-outline{
+    color : rgb(100, 100, 198) !important;
+    border-color: rgb(100, 100, 198);
+}
+
+button:hover {
+    color: whitesmoke !important;
+    background-color: rgb(100, 100, 198) !important;
+}
+
+main, footer, .banner, .dropdown-menu{
+    background-color: rgb(234, 227, 225) !important;
+}
+
+
+footer {
+    text-align: center;
+    color: #262525;
+    padding: 30px;
+}
+
+.indexFooter{
+    text-align: center;
+    color: rgb(163, 163, 175) !important;
+    padding: 30px;
+}
+  
+.redes {
+    color: #262525;
+}
+
+.banner{
+    padding-top: 30px;
+    text-align: center;
+}
+
+.icon-banner{
+    height: 180px;
+}
+
+.icon-banner2{
+    height: 60px;
+}
+
+.slogan{
+    font-size: 16px;
+    color : rgb(100, 100, 198);
+    font-weight: 400;
+}
+
+.contenedor-div-padre{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 200px);
+    padding: 30px;
+    grid-gap: 40px;
+}
+
+.contenedor-div-hijo1{
+    height: 200px;
+    background-image: url(../img/prestamo1.jpg);
+    background-position: center;
+    background-size: cover;
+    border-color: whitesmoke;
+    box-shadow: 26px 28px 15px -8px rgba(0,0,0,0.15);
+    border-radius: 0.7rem;
+}
+
+.contenedor-div-hijo2{
+    height: 200px;
+    background-image: url(../img/seguros.jpg);
+    background-position: center;
+    background-size: cover;
+    border-color: whitesmoke;
+    box-shadow: 26px 28px 15px -8px rgba(0,0,0,0.15);
+    border-radius: 0.7rem;
+}
+
+.contenedor-div-hijo1-A{
+    height: 200px;
+    background-image: url(../img/vivienda.jpg);
+    background-position: center;
+    background-size: cover;
+    border-color: whitesmoke;
+    box-shadow: 26px 28px 15px -8px rgba(0,0,0,0.15);
+    border-radius: 0.7rem;
+}
+
+.contenedor-div-hijo2-B{
+    height: 200px;
+    background-image: url(../img/automovil.jpg);
+    background-position: center;
+    background-size: cover;
+    border-color: whitesmoke;
+    box-shadow: 26px 28px 15px -8px rgba(0,0,0,0.15);
+    border-radius: 0.7rem;
+}
+
+.prestamosYseguros{
+    text-align: center;
+    padding: 0px;
+}
+
+.prestamosYseguros:hover{
+    color: rgb(100, 100, 198);
+}
+
+.prestamosYsegurosH1{
+    color: rgb(163, 163, 175);
+}
+
+.prestamosYsegurosH1:hover{
+    color: rgb(100, 100, 198);
+}
+
+.panel-desgloce {
+    padding: 20px;
+    background-color: rgb(100, 100, 198);
+    box-shadow: 4px 2px 20px lightgray;
+    max-width: 480px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+label {
+    margin-top: 0px;
+    padding: 0;
+}
+
+.centrar-elementos {
+    text-align: center;
+    padding-top: 80px;
+}
+
+.panel-cotizacion {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+button{
+    font-size: x-large;
+    margin-top: 20px;
+    padding: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 770px) {
+    .nav-link, .dropdown-item{
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 770px) and (max-width: 1025px) {
+    .contenedor-div-padre{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(1, 400px);
+        padding: 30px;
+        grid-gap: 40px;
+    }
+
+    .prestamosYseguros{
+        font-size: x-large;
+    }
+    
+  }
+
+@media only screen and (min-width: 1025px) and (max-width: 2820px) {
+    
+    .barra-navegacion{
+        font-size: x-large;
+    }
+    .navbar-light{
+        padding: 50px;
+    }
+
+    .contenedor-div-padre{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(1, 300px);
+        padding: 30px 30px 30px 100px;
+        grid-gap: 40px;
+    }
+
+    .contenedor-div-hijo1{
+        height: 300px;
+        width: 600px;
+    }
+
+    .contenedor-div-hijo2{
+        height: 300px;
+        width: 600px;
+    }
+
+    .contenedor-div-hijo1-A{
+        height: 300px;
+        width: 600px;
+    }
+
+    .contenedor-div-hijo2-B{
+        height: 300px;
+        width: 600px;
+    }
+
+    .prestamosYseguros{
+        font-size: x-large;
+    }
+
+    footer {
+        text-align: center;
+        color: #fff;
+        padding-top: 90px;
+    }
+  }
