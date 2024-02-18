@@ -1,7 +1,7 @@
-# Tercer pre-entrega - Coder House - Javascript 
+# Proyecto final - Coder House - Javascript 
 # Alumno: Miranda, Joel Hernán 
 # Comisión: 49840 
-# Versión 2.1 
+# Versión 1.1 
 # Tecnologías 
 
     - HTML 5 
@@ -16,14 +16,14 @@
 
 # Contenido 
 
-    - Carpeta root (PreEntrega3-Miranda-Joel) 
+    - Carpeta root 
     - Carpeta .vscode
     - Carpeta cs
     - Carpeta img
     - Carpeta js
     - Carpeta pages
     - Archivo index.html
-    - README.txt (Detalle de contenido y desarrollo de PreEntrega2) 
+    - README.txt (Detalle de contenido y desarrollo) 
 
 # Descripción
 
@@ -32,7 +32,7 @@
      Todo el código se encuentra indentado 4 espacios a la derecha, prolijo y con comentarios especificando línea 
     de código.
 
-     En gitHub está el repositorio y el link para visualizar el proyecto. ( https://colosoad.github.io/PreEntrega3-Miranda-Joel/ )
+     En gitHub está el repositorio y el link para visualizar el proyecto. ( https://colosoad.github.io/ProyectoFinal-Miranda-Joel/ )
 
 # Objetivos
 
@@ -44,10 +44,10 @@
     ✅ Funciones esenciales que utilicen variables, constantes, arrays, etc.
     ✅ Clases JS.
     ✅ Lógica funcional de la aplicación.
-    ✅ Operadores teranrios.
+    ✅ Operadores ternarios.
     ✅ Notificación de resultados y/ o errores con SweetAlert.
     ✅ Interacción absoluta con usuario.
-    ✅ Evento "click".
+    ✅ Eventos "click" y "mousemove".
     ✅ Modificación de html con js mediante enlaces al DOM.
     ✅ Uso de información media JSON locaStorage y eliminacion de la misma cuando se finaliza su propio uso.
 
