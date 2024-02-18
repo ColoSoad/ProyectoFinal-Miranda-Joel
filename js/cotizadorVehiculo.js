@@ -36,17 +36,32 @@ function refrescarPagina(){
 }
 
 //EVENTOS
+
+//CLICK
 btnContratar.addEventListener("click", ()=> {
     Swal.fire({
-        title: "FELICITACIONES!",
-        text: `Se enviará un email a ${email} para finalizar la operación`,
-        icon: "success"
-    });
-    localStorage.removeItem("informacionDelSeguroDeVehiculo")
-    // USO DE ASINCRONISMO CON "setTimeout" PARA REFRESCAR PAGINA DE DETALLE LUEGO DE 3segundos, Y AL VENIR SIN DATOS SE REEDIRECCIONA A "./seguroAutomovil.html"
-    setTimeout(()=>{
-        refrescarPagina()
-    }, 5000)
+        icon: 'question',
+        title: 'Finalizar operación',
+        text: '¿Confirma la realización de la operación?',
+        showCancelButton: true,
+        confirmButtonText: 'Sí',
+        cancelButtonText: 'No'
+    }).then((resultado)=> {
+        if (resultado.isConfirmed) {
+            Swal.fire({
+                title: "FELICITACIONES!",
+                text: `Se enviará un email a ${email} para finalizar la operación`,
+                icon: "success",
+                confirmButtonText: 'Aceptar'
+            });
+            localStorage.removeItem("informacionDelSeguroDeVehiculo");
+            // USO DE ASINCRONISMO CON "setTimeout" PARA REFRESCAR PAGINA DE DETALLE LUEGO DE 5segundos, Y AL VENIR SIN DATOS SE REEDIRECCIONA A "./seguroAutomovil.html"
+            setTimeout(()=>{
+                refrescarPagina()
+            }, 5000)
+        }
+    })
 })
 
+// CODIGO AUTOEJECUTABLE
 recuperarInformacionDeLocalStorage()
