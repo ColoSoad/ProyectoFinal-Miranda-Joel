@@ -37,12 +37,13 @@ function devolverIntereses(tipoDelCredito) {
 // FUNCION QUE RECIBE COMO PARAMETROS 5 ARGUMENTOS Y CREA UN OBJETO LITERAL LLAMADO 'informacionDelPrestamo'
 // PARA PODER ALMACENARLO EN EL NAVEGADOR MEDIANTE 'localStorage', LS NO PERMITE DATOS EN FORMATO DE OBJETOS, YA QUE SE PROCEDE
 // A HACER LA TRANSFORMACION DE DATO CON JSON.stringify() : 
-function guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeCuota, tipoDeInteres, cuota) {
+function guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeCuota, tipoDeInteres, tipoDeIntereses, cuota) {
     const informacionDelPrestamo = {
         email: email,
         montoASolicitar: montoASolicitar,
         cantidadDeCuota: cantidadDeCuota,
         tipoDeInteres: tipoDeInteres,
+        tipoDeIntereses: tipoDeIntereses,
         cuota: cuota
     }
     localStorage.setItem("informacionDelPrestamo", JSON.stringify(informacionDelPrestamo))
@@ -57,10 +58,14 @@ function calcularPrestamo() {
     let email = inputEmail.value
     let montoASolicitar = parseInt(inputMontoASolicitar.value)
     let cantidadDeCuota = parseInt(inputCantidadDeCuota.value)
-    let tipoDeInteres = devolverIntereses(selectTipoDeInteres.value)
+    let tipoDeIntereses = (devolverIntereses(selectTipoDeInteres.value)-1)*100
+    const divisor = 12
+    let factorCuotas = cantidadDeCuota / divisor;
+    let interesCalculado = tipoDeIntereses*factorCuotas
+    let tipoDeInteres = (interesCalculado +100)/100
     const creditoSolicitado = new Credito(email, cantidadDeCuota, tipoDeInteres, montoASolicitar)
     let cuota = creditoSolicitado.calcularCuotaMensual() 
-    guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeCuota, tipoDeInteres, cuota)
+    guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeCuota, tipoDeInteres, tipoDeIntereses, cuota)
     location.href = "calculadorPrestamo.html"
 }
 

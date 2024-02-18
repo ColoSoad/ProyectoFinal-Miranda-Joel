@@ -30,6 +30,11 @@ function recuperarInformacionDeLocalStorage() {
     }    
 }
 
+// FUNCION PARA REFRESCAR PÁGINA DE CONTRATAR SERVICIO, PARA QUE SE REEDIRECCIONE AL SITIO "./seguroAutomovil.html"
+function refrescarPagina(){
+    location.reload(true);
+}
+
 //EVENTOS
 btnContratar.addEventListener("click", ()=> {
     Swal.fire({
@@ -38,6 +43,10 @@ btnContratar.addEventListener("click", ()=> {
         icon: "success"
     });
     localStorage.removeItem("informacionDelSeguroDeVehiculo")
+    // USO DE ASINCRONISMO CON "setTimeout" PARA REFRESCAR PAGINA DE DETALLE LUEGO DE 3segundos, Y AL VENIR SIN DATOS SE REEDIRECCIONA A "./seguroAutomovil.html"
+    setTimeout(()=>{
+        refrescarPagina()
+    }, 5000)
 })
 
 recuperarInformacionDeLocalStorage()

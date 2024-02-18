@@ -22,6 +22,11 @@ function recuperarInformacionDeLocalStorage() {
     }    
 }
 
+// FUNCION PARA REFRESCAR PÁGINA DE CONTRATAR SERVICIO, PARA QUE SE REEDIRECCIONE AL SITIO "./seguroCasa.html"
+function refrescarPagina(){
+    location.reload(true);
+}
+
 //EVENTOS
 btnContratar.addEventListener("click", ()=> {
     Swal.fire({
@@ -30,6 +35,10 @@ btnContratar.addEventListener("click", ()=> {
         icon: "success"
     });   
     localStorage.removeItem("informacionDelSeguroDeHogar")
+    // USO DE ASINCRONISMO CON "setTimeout" PARA REFRESCAR PAGINA DE DETALLE LUEGO DE 3segundos, Y AL VENIR SIN DATOS SE REEDIRECCIONA A "./seguroCasa.html"
+    setTimeout(()=>{
+        refrescarPagina()
+    }, 5000)
 })
 
 // CODIGO AUTOEJECUTABLE
