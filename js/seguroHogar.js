@@ -5,20 +5,15 @@ const selectUbicacion = document.querySelector("select#ubicacion")
 const inputMts2 = document.querySelector("input#Mts2")
 const btnCotizar = document.querySelector("button.btnCotizar")
 const btnInicio = document.querySelector("a#inicio")
+const contenedor = document.querySelector("div.div-father")
 
-// VARIABLES GLOBALES, ARRAYS Y ARRAYS DE OBJETOS LITERALES 
-const inmueblesTipo = [{ codigo: 1, tipo: 'Hogar', factor: 1.12,},
-                       { codigo: 2, tipo: 'Local comercial', factor: 1.44 },
-                       { codigo: 3, tipo: 'Consultorio / Oficina', factor: 1.75 }]
-
-
-const inmuebleUbicacion =  [{tipo2: 'CABA', factorUbicacion: 1.13},
-                            {tipo2: 'Tandil', factorUbicacion: 1.07},
-                            {tipo2: 'Costa Atlántica', factorUbicacion: 1.29},
-                            {tipo2: 'Patagonia', factorUbicacion: 1.00},
-                            {tipo2: 'Cuyo', factorUbicacion: 1.11}]
-
+// VARIABLES GLOBALES, ARRAYS Y ARRAYS DE OBJETOS LITERALES
+const URL = "../seguroTipoInmueble.json"
+const URL2 = "../seguroUbicacionInmueble.json"
+const inmueblesTipo = []
+const inmuebleUbicacion =  []
 const costoM2 = 221.02
+
 
 // FUNCIONES 'CARGAR TIPO DE INMUEBLE Y UBICACION'
 function cargartipoDeInmuebleYUbicacion() {
@@ -31,6 +26,51 @@ function cargartipoDeInmuebleYUbicacion() {
         })    
     }
 }
+
+
+//FUNCION PARA RETORNAR ERROR
+function retornarError() {
+    return `<div class="div-error">
+                <p class="logos">
+                    <img class="logoPrestamo" src="../img/error.png" alt="Foto error"></h1>
+                </p>
+                <h3 class="textos3">No se ha podido cargar la información</h3>
+                <h4 class="textos3">Intenta nuevamente en unos instantes...</h4>
+            </div>`
+}
+
+
+//FUNCION ASINCRONICA PARA OBTENER FACTORES DE LOS TIPOS DE INMUEBLES Y UBICACIÓN CON FETCH:
+function obtenerFactores() {
+    fetch(URL)
+    .then((respuesta)=> {
+        if (respuesta.ok) {
+            return respuesta.json()
+        } else {
+            throw new Error("No se pudo obtener la información solicitada. (" + respuesta.status + ")")
+        }
+    } )
+    .then((datos)=> inmueblesTipo.push(...datos) )
+    .then(()=> cargartipoDeInmuebleYUbicacion(inmueblesTipo))
+    .catch((error)=> {
+        contenedor.innerHTML = retornarError()
+    })
+    fetch(URL2)
+    .then((respuesta)=> {
+        if (respuesta.ok) {
+            return respuesta.json()
+        } else {
+            throw new Error("No se pudo obtener la información solicitada. (" + respuesta.status + ")")
+        }
+    } )
+    .then((datos)=> inmuebleUbicacion.push(...datos) )
+    .then(()=> cargartipoDeInmuebleYUbicacion(inmuebleUbicacion))
+    .catch((error)=> {
+        contenedor.innerHTML = retornarError()
+    })
+    
+}
+
 
 // FUNCION PARA DEVOLVER EL FACTOR MULTIPLICADOR DE SU TIPO DE VIVIENDA.
 // ES UNA FUNCION QUE RECIBE UN ARGUMENTO (tipo) Y DENTRO DE LA ESTRUCTURA DEFINE UNA VARIABLE LOCAL PARA
@@ -104,4 +144,4 @@ btnCotizar.addEventListener("click", ()=> {
 })
 
 // CODIGO AUTOEJECUTABLE
-cargartipoDeInmuebleYUbicacion()
+obtenerFactores()

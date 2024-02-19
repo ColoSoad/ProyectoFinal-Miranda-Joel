@@ -1,0 +1,22 @@
+[
+    {
+      "id":11,
+      "tipo":"Compacto",
+      "factorTipo":0.5
+    },
+    {
+      "id":12,
+      "tipo":"Sedan",
+      "factorTipo":1
+    },
+    {
+      "id":13,
+      "tipo":"Suv",
+      "factorTipo":1.5
+    },
+    {
+      "id":14,
+      "tipo":"Utilitario",
+      "factorTipo":2
+    }
+]

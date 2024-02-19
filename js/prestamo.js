@@ -10,8 +10,6 @@ const contenedor = document.querySelector("div.div-father")
 
 const URL = "../creditos.json"
 const tiposDeCreditos = []
-// const tiposDeCreditos = [{id: 1, tipoDelCredito: 'Credito Personal', interes: 1.45},
-//                        {id: 2, tipoDelCredito: 'Credito Prendario', interes: 1.95},]
 
 
 // FUNCIONES 'CARGAR TIPO DE INTERES'
@@ -40,15 +38,14 @@ function retornarError() {
             </div>`
 }
 
-//FUNCION ASINCRONICA PARA OBTENER INTERESES DE LOS TIPOS DE CREDITOS CON FECHT:
-async function obtenerIntereses() {
-
+//FUNCION ASINCRONICA PARA OBTENER INTERESES DE LOS TIPOS DE CREDITOS CON FETCH:
+function obtenerIntereses() {
     fetch(URL)
     .then((respuesta)=> {
         if (respuesta.ok) {
             return respuesta.json()
         } else {
-            throw new Error("No se pudo obtener los productos. (" + respuesta.status + ")")
+            throw new Error("No se pudo obtener la información solicitada. (" + respuesta.status + ")")
         }
     } )
     .then((datos)=> tiposDeCreditos.push(...datos) )

@@ -1,0 +1,15 @@
+[{
+        "id": 3,
+        "tipo": "Hogar",
+        "factor": 1.12
+    },
+    {
+        "id": 4,
+        "tipo": "Local comercial",
+        "factor": 1.44
+    },
+    {
+        "id": 5,
+        "tipo": "Consultorio / Oficina",
+        "factor": 1.75
+    }]

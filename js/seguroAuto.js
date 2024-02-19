@@ -11,20 +11,12 @@ const selectCombustible = document.querySelector("select#combustible")
 const btnCalcular = document.querySelector("button.btnCalcular")
 
 // VARIABLES GLOBALES, ARRAYS Y ARRAYS DE OBJETOS LITERALES
-const tipoVehiculo = [{ tipo: 'Compacto', factorTipo: .5 },
-                      { tipo: 'Sedan', factorTipo: 1 },
-                      { tipo: 'Suv', factorTipo: 1.5 },
-                      { tipo: 'Utilitario', factorTipo: 2 }]
-
-const PlanCobertura = [{ tipo2: '(C) - Responsabilidad Civil + Robo', sumador: 100000 },
-                       { tipo2: '(C+) - C + Hurto, incendio total y parcial', sumador: 120000 },
-                       { tipo2: '(C-Full) - (C+) + Granizo e inundaciones', sumador: 160000 },
-                       { tipo2: '(C-Full++) - (C-FULL) + Franquicia', sumador: 200000 }]
-
-const antiguedadVehiculos = [{ tipo3: '1970 - 1988', factorAntiguedad: 1.5 },
-                             { tipo3: '1989 - 2007', factorAntiguedad: 1.2 },
-                             { tipo3: '2008 - 2024', factorAntiguedad: .9 }]
-
+URL = "../seguroAutoTipo.json"
+URL2 = "../seguroAutoCobertura.json"
+URL3 = "../seguroAutoAntiguedad.json"
+const tipoVehiculo = []
+const PlanCobertura = []
+const antiguedadVehiculos = []
 const cuotaCosto = .25
 
 // FUNCIONES 'CARGAR TIPO DE VEHICULO, ANTIGUEDAD Y ANTIGUEDAD'

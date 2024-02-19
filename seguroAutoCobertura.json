@@ -1,0 +1,22 @@
+[
+    {
+      "id":15,
+      "tipo2":"(C) - Responsabilidad Civil + Robo",
+      "sumador":100000
+    },
+    {
+      "id":16,
+      "tipo2":"(C+) - C + Hurto, incendio total y parcial",
+      "sumador":120000
+    },
+    {
+      "id":17,
+      "tipo2":"(C-Full) - (C+) + Granizo e inundaciones",
+      "sumador":160000
+    },
+    {
+      "id":18,
+      "tipo2":"(C-Full++) - (C-FULL) + Franquicia",
+      "sumador":200000
+    }
+]

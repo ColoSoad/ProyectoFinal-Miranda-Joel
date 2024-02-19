@@ -1,0 +1,27 @@
+[
+    {
+        "id": 6,
+        "tipo2": "CABA",
+        "factorUbicacion": 1.13
+    },
+    {
+        "id": 7,
+        "tipo2": "Tandil",
+        "factorUbicacion": 1.07
+    },
+    {
+        "id": 8,
+        "tipo2": "Costa Atlántica",
+        "factorUbicacion": 1.29
+    },
+    {
+        "id": 9,
+        "tipo2": "Patagonia",
+        "factorUbicacion": 1
+    },
+    {
+        "id": 10,
+        "tipo2": "Cuyo",
+        "factorUbicacion": 1.11
+    }
+]

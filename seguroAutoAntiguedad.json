@@ -1,0 +1,17 @@
+[
+    {
+      "id":19,
+      "tipo3":"1970 - 1988",
+      "factorAntiguedad":1.5
+    },
+    {
+      "id":20,
+      "tipo3":"1989 - 2007",
+      "factorAntiguedad":1.2
+    },
+    {
+      "id":21,
+      "tipo3":"2008 - 2024",
+      "factorAntiguedad":0.9
+    }
+]
