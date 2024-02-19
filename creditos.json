@@ -1,0 +1,12 @@
+[
+  {
+    "id":1,
+    "tipoDelCredito":"Credito Personal",
+    "interes":1.45
+  },
+  {
+    "id":2,
+    "tipoDelCredito":"Credito Prendario",
+    "interes":1.95
+  }
+]

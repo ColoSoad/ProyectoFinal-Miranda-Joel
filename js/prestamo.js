@@ -4,25 +4,60 @@ const inputMontoASolicitar = document.querySelector("input#montoASolicitar")
 const inputCantidadDeCuota = document.querySelector("input#cantidadDeCuota")
 const selectTipoDeInteres = document.querySelector("select#tipoDeInteres")
 const btnCalcular = document.querySelector("button.btnCalcular")
+const contenedor = document.querySelector("div.div-father")
 
 // VARIABLES GLOBALES, ARRAYS Y ARRAYS DE OBJETOS LITERALES
 
-const tiposDeCreditos = [{id: 1, tipoDelCredito: 'Credito Personal', interes: 1.45},
-                       {id: 2, tipoDelCredito: 'Credito Prendario', interes: 1.95},]
+const URL = "../creditos.json"
+const tiposDeCreditos = []
+// const tiposDeCreditos = [{id: 1, tipoDelCredito: 'Credito Personal', interes: 1.45},
+//                        {id: 2, tipoDelCredito: 'Credito Prendario', interes: 1.95},]
 
 
 // FUNCIONES 'CARGAR TIPO DE INTERES'
 // ES UNA FUNCION EN LA CUAL SE VALIDA SI EL ARRAY DE OBJETOS LLAMADA "tiposDeCreditos" TIENE ALGUN VALOR ALMACENADO, SI ES VERDADERO
 // RECORRE EL ARRAY CON UN FOR-EACH PARA CARGAR AL HTML MEDIANTE LA PROPIEDAD 'innerHTML' LAS OPCIONES DE TIPOS DE CREDITO, PERSONAL
-// Ó PRENDARIO:
-function cargartipoDeInteres() {
+// Ó PRENDARIO. SI ES FALSO DEVUELVE UN MENSAJE DE ERROR MEDIANTE LA FUNCION "retornarError()":
+function cargartipoDeInteres(tiposDeCreditos) {
     if (tiposDeCreditos.length > 0) {
         tiposDeCreditos.forEach((interes)=> {
             selectTipoDeInteres.innerHTML += `<option>${interes.tipoDelCredito}</option>`
         })
     }
+    else {
+        contenedor.innerHTML = retornarError()
+    }
 }
 
+//FUNCION PARA RETORNAR ERROR
+function retornarError() {
+    return `<div class="div-error">
+                <p class="logos">
+                    <img class="logoPrestamo" src="../img/error.png" alt="Foto error"></h1>
+                </p>
+                <h3 class="textos3">No se ha podido cargar la información</h3>
+                <h4 class="textos3">Intenta nuevamente en unos instantes...</h4>
+            </div>`
+}
+
+//FUNCION ASINCRONICA PARA OBTENER INTERESES DE LOS TIPOS DE CREDITOS CON FECHT:
+async function obtenerIntereses() {
+
+    fetch(URL)
+    .then((respuesta)=> {
+        if (respuesta.ok) {
+            return respuesta.json()
+        } else {
+            throw new Error("No se pudo obtener los productos. (" + respuesta.status + ")")
+        }
+    } )
+    .then((datos)=> tiposDeCreditos.push(...datos) )
+    .then(()=> cargartipoDeInteres(tiposDeCreditos))
+    .catch((error)=> {
+        contenedor.innerHTML = retornarError()
+    })
+    
+}
 
 // FUNCION PARA DEVOLVER EL FACTOR MULTIPLICADOR QUE VA A REPRESENTAR EL INTERÉS DEL CREDITO SELECCIONADO
 // ES UNA FUNCION QUE RECIBE UN ARGUMENTO (tipoDelCredito) Y DENTRO DE LA ESTRUCTURA DEFINE UNA VARIABLE LOCAL PARA
@@ -32,7 +67,6 @@ function devolverIntereses(tipoDelCredito) {
     let creditoTipo = tiposDeCreditos.find((creditoTipo)=> creditoTipo.tipoDelCredito === tipoDelCredito)
     return creditoTipo ? creditoTipo.interes : 0;
 }
-
 
 // FUNCION QUE RECIBE COMO PARAMETROS 5 ARGUMENTOS Y CREA UN OBJETO LITERAL LLAMADO 'informacionDelPrestamo'
 // PARA PODER ALMACENARLO EN EL NAVEGADOR MEDIANTE 'localStorage', LS NO PERMITE DATOS EN FORMATO DE OBJETOS, YA QUE SE PROCEDE
@@ -89,4 +123,4 @@ btnCalcular.addEventListener("click", ()=> {
 })
 
 // CODIGO AUTOEJECUTABLE
-cargartipoDeInteres()
+obtenerIntereses()
