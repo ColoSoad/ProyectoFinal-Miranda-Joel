@@ -68,21 +68,18 @@
             <div class="div-cotizador">
                 <label class="prest" for="email">Ingrese su e-mail:</label>
                 <input type="email" id="email" required>
-
                 <label class="prest" for="montoASolicitar">Monto de dinero a solicitar:</label>
                 <input type="number" id="montoASolicitar" placeholder="Ingresa el monto" required value="0" min="50000"
                     max="50000000" step="50000">
-
                 <label class="prest" for="cantidadDeCuota">¿En cuántas cuotas devolverás el préstamo?</label>
                 <input type="number" id="cantidadDeCuota" placeholder="Ingresa el plazo en meses" value="0" min="12"
                     max="60" step="12" required>
-
                 <label class="prest" for="tipoDeInteres">¿Qué tipo de crédito necesitas?</label>
                 <select id="tipoDeInteres">
                     <option class="flechita" disabled selected>Elige aquí...</option>
                 </select>
                 <div class="btnCalcularYCotizar separador">
-                    <button class="btnCalcular button button-outline">CALCULAR</button>
+                    <button type="button" class="btnCalcular button button-outline">CALCULAR</button>
                 </div>
             </div>
         </div>

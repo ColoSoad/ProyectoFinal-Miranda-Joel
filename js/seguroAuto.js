@@ -9,11 +9,12 @@ const selectTipoA = document.querySelector("select#tipoA")
 const selectTipoC = document.querySelector("select#tipoC")
 const selectCombustible = document.querySelector("select#combustible")
 const btnCalcular = document.querySelector("button.btnCalcular")
+const contenedor = document.querySelector("div.div-father")
 
 // VARIABLES GLOBALES, ARRAYS Y ARRAYS DE OBJETOS LITERALES
-URL = "../seguroAutoTipo.json"
-URL2 = "../seguroAutoCobertura.json"
-URL3 = "../seguroAutoAntiguedad.json"
+const URL = "../seguroAutoTipo.json"
+const URL2 = "../seguroAutoCobertura.json"
+const URL3 = "../seguroAutoAntiguedad.json"
 const tipoVehiculo = []
 const PlanCobertura = []
 const antiguedadVehiculos = []
@@ -35,6 +36,65 @@ function cargarTipoDeVehiculoCoberturaYAntiguedad() {
             selectTipoA.innerHTML += `<option>${factorAntiguedad.tipo3}</option>`
         })
     }
+}
+
+//FUNCION PARA RETORNAR ERROR
+function retornarError() {
+    return `<div class="div-error">
+                <p class="logos">
+                    <img class="logoPrestamo" src="../img/error.png" alt="Foto error"></h1>
+                </p>
+                <h3 class="textos3">No se ha podido cargar la información</h3>
+                <h4 class="textos3">Intenta nuevamente en unos instantes...</h4>
+            </div>`
+}
+
+//FUNCION ASINCRONICA PARA OBTENER FACTORES DE LOS TIPOS DE VEHICULOS, ANTIGUEDAD Y SUMADOR DEL PLAN DE COBERTURA, CON FETCH:
+function obtenerFactores() {
+    fetch(URL)
+    .then((respuesta)=> {
+        if (respuesta.ok) {
+            return respuesta.json()
+        } else {
+            throw new Error("No se pudo obtener la información solicitada. (" + respuesta.status + ")")
+        }
+    })
+    .then((datos)=> tipoVehiculo.push(...datos) )
+    .then(()=> cargarTipoDeVehiculoCoberturaYAntiguedad(tipoVehiculo))
+    .catch((error)=> {
+        contenedor.innerHTML = retornarError()
+    })
+
+
+    fetch(URL2)
+    .then((respuesta)=> {
+        if (respuesta.ok) {
+            return respuesta.json()
+        } else {
+            throw new Error("No se pudo obtener la información solicitada. (" + respuesta.status + ")")
+        }
+    } )
+    .then((datos)=> PlanCobertura.push(...datos) )
+    .then(()=> cargarTipoDeVehiculoCoberturaYAntiguedad(PlanCobertura))
+    .catch((error)=> {
+        contenedor.innerHTML = retornarError()
+    })
+
+
+    fetch(URL3)
+    .then((respuesta)=> {
+        if (respuesta.ok) {
+            return respuesta.json()
+        } else {
+            throw new Error("No se pudo obtener la información solicitada. (" + respuesta.status + ")")
+        }
+    } )
+    .then((datos)=> antiguedadVehiculos.push(...datos) )
+    .then(()=> cargarTipoDeVehiculoCoberturaYAntiguedad(antiguedadVehiculos))
+    .catch((error)=> {
+        contenedor.innerHTML = retornarError()
+    })
+    
 }
 
 // FUNCION PARA DEVOLVER EL FACTOR MULTIPLICADOR DE SU TIPO DE VEHICULO.
@@ -138,4 +198,4 @@ btnCalcular.addEventListener("click", ()=> {
 })
 
 // CODIGO AUTOEJECUTABLE
-cargarTipoDeVehiculoCoberturaYAntiguedad()
+obtenerFactores()
