@@ -31,7 +31,7 @@ function cargartipoDeInteres(tiposDeCreditos) {
 function retornarError() {
     return `<div class="div-error">
                 <p class="logos">
-                    <img class="logoPrestamo" src="../img/error.png" alt="Foto error"></h1>
+                    <img class="logoPrestamo" src="../img/error.png" alt="Foto error">
                 </p>
                 <h3 class="textos3">No se ha podido cargar la información</h3>
                 <h4 class="textos3">Intenta nuevamente en unos instantes...</h4>
@@ -80,34 +80,40 @@ function guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeC
     localStorage.setItem("informacionDelPrestamo", JSON.stringify(informacionDelPrestamo))
 }
 
-// FUNCION PARA CALCULAR CUOTAS
+// // FUNCION PARA  CAPTURAR DATOS MEDIANTE EL EVENTO "submit" Y CALCULAR CUOTAS
 // SE DEFINEN VARIABLES LOCALES PARA ATRAPAR LOS DATOS, LOS DATOS QUE LA CLASE NECESITA EN FORMATO NUMERO SE TRANSFORMARON CON 
 // 'parseInt()' LUEGO SE INSTANCIA A LA CLASE 'Credito' PASANDOLE LOS VALORES CORRESPONDIENTES Y SE CREA VARIABLE LOCAL CON EL VALOR
-// DE EL METODO DE LA CLASE INSTANCIADO. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 'location' CON EL
-// METODO 'href' PARA REDIRECCIONAR LA PÁGINA A 'calculadorPrestamo.html' :
-function calcularPrestamo() {
-    let email = inputEmail.value
-    let montoASolicitar = parseInt(inputMontoASolicitar.value)
-    let cantidadDeCuota = parseInt(inputCantidadDeCuota.value)
-    let tipoDeIntereses = (devolverIntereses(selectTipoDeInteres.value)-1)*100
-    const divisor = 12
-    let factorCuotas = cantidadDeCuota / divisor;
-    let interesCalculado = tipoDeIntereses*factorCuotas
-    let tipoDeInteres = (interesCalculado +100)/100
-    const creditoSolicitado = new Credito(email, cantidadDeCuota, tipoDeInteres, montoASolicitar)
-    let cuota = creditoSolicitado.calcularCuotaMensual() 
-    guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeCuota, tipoDeInteres, tipoDeIntereses, cuota)
-    location.href = "calculadorPrestamo.html"
+// DE EL METODO DE LA CLASE INSTANCIADA. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 'location' CON EL
+// ATRIBUTO 'href' PARA REDIRECCIONAR LA PÁGINA A 'calculadorPrestamo.html' :
+function atraparValoresConEventoSubmit(){
+    const formulario = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let email = inputEmail.value;
+        let montoASolicitar = parseInt(inputMontoASolicitar.value);
+        let cantidadDeCuota = parseInt(inputCantidadDeCuota.value);
+        let tipoDeIntereses = (devolverIntereses(selectTipoDeInteres.value)-1)*100;
+        const divisor = 12
+        let factorCuotas = cantidadDeCuota / divisor;
+        let interesCalculado = tipoDeIntereses*factorCuotas;
+        let tipoDeInteres = (interesCalculado +100)/100;
+        const creditoSolicitado = new Credito(email, cantidadDeCuota, tipoDeInteres, montoASolicitar);
+        let cuota = creditoSolicitado.calcularCuotaMensual();
+        guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeCuota, tipoDeInteres, tipoDeIntereses, cuota);
+        location.href = "calculadorPrestamo.html"
+    })
 }
 
-// EVENTOS
+// EVENTO "click" PARA VALIDAR POR SEGUNDA VEZ LA CORRECTA ENTRADA DE DATOS EN LOS INPUTS DEL FORM, SI VA POR EL CAMINO FELIZ
+// LLAMA A LA FUNCION QUE UTILIZA EL EVENTO "submit" Y LA MISMA REEDIRECCIONA AL HTML CORRESPONDIENTE, SI VA POR EL CAMINO TRISTE
+// MUESTRA UN MSJ DE INFORMACION MEDIANTE EL USO DE LIBRERIA "SweetAlert2":
 btnCalcular.addEventListener("click", ()=> {
     let resultado = selectTipoDeInteres.value;
     let resultado2 = inputEmail.value;
     let resultado3 = inputMontoASolicitar.value;
     let resultado4 = inputCantidadDeCuota.value;
     if (resultado !== 'Elige aquí...' && resultado2 !== "" && resultado3 !== "0" && resultado4 !== "0") {
-        calcularPrestamo()
+        atraparValoresConEventoSubmit()
     }
     else {
         Swal.fire({
