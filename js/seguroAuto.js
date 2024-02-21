@@ -148,29 +148,57 @@ function guardarInfoDeSegurosMueblesEnLS(email, marca, modelo, factorTipoDeVehic
     localStorage.setItem("informacionDelSeguroDeVehiculo", JSON.stringify(informacionDelSeguroDeVehiculo))
 }
 
+// // FUNCION PARA  CAPTURAR DATOS MEDIANTE EL EVENTO "submit" Y COTIZAR SEGURO
+// SE DEFINEN VARIABLES LOCALES PARA ATRAPAR LOS DATOS, LOS DATOS QUE LA CLASE NECESITA EN FORMATO NUMERO SE TRANSFORMARON CON 
+// 'parseInt()' LUEGO SE INSTANCIA A LA CLASE 'cotizacionSolicitada' PASANDOLE LOS VALORES CORRESPONDIENTES Y SE CREA VARIABLE 
+// LOCAL CON EL VALOR DE EL METODO DE LA CLASE INSTANCIADA. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 
+// 'location' CON EL ATRIBUTO 'href' PARA REDIRECCIONAR LA PÁGINA A 'cotizadorSeguroAuto.html' :
+function atraparValoresConEventoSubmitYCotizar(){
+    const formulario = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let email = inputEmail.value
+        let marca = inputMarca.value
+        let modelo = inputModelo.value
+        let factorTipoDeVehiculo = devolverFactorTipoMueble(selectTipoV.value)
+        let valorDeclarado = parseFloat(inputValor.value)
+        let año = parseInt(inputAño.value)
+        let SumadortipoDeCobertura = devolverSumadorTipoMueble(selectTipoC.value)
+        let factorTipoAntiguedad = devolverfactorAntiguedadVehiculo(selectTipoA.value);
+        let tipoDVehiculo = selectTipoV.value
+        let cobertura = selectTipoC.value
+        let combustible = selectCombustible.value
+        const cotizacionVehiculoSolicitada = new SeguroMueble(factorTipoDeVehiculo, valorDeclarado, año, SumadortipoDeCobertura, factorTipoAntiguedad, cuotaCosto)
+        let cuota = cotizacionVehiculoSolicitada.obtenerValorCuota()
+        let prima = cotizacionVehiculoSolicitada.obtenerPrimaAsegurada()
+        guardarInfoDeSegurosMueblesEnLS(email, marca, modelo, factorTipoDeVehiculo, valorDeclarado, año, SumadortipoDeCobertura, factorTipoAntiguedad, cuotaCosto, prima, cuota, tipoDVehiculo, cobertura, combustible)
+        location.href = "cotizadorSeguroAuto.html"
+    })
+}
+
 // FUNCION PARA COTIZAR SEGURO DE VEHICULO EN CUOTAS/MES Y PRIMA ASEGURADA
 // SE DEFINEN VARIABLES LOCALES PARA ATRAPAR LOS DATOS. LOS DATOS QUE LA CLASE NECESITA EN FORMATO NUMERO SE TRANSFORMARON CON 
 // 'parseInt()' LUEGO SE INSTANCIA A LA CLASE 'SeguroMueble' PASANDOLE LOS VALORES CORRESPONDIENTES Y SE CREA VARIABLE LOCAL CON EL
 // VALOR DE EL METODO DE LA CLASE. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 'location' CON EL
 // METODO 'href' PARA REDIRECCIONAR LA PÁGINA A 'cotizadorHogar.html' :
-function cotizarSeguro() {
-    let email = inputEmail.value
-    let marca = inputMarca.value
-    let modelo = inputModelo.value
-    let factorTipoDeVehiculo = devolverFactorTipoMueble(selectTipoV.value)
-    let valorDeclarado = parseFloat(inputValor.value)
-    let año = parseInt(inputAño.value)
-    let SumadortipoDeCobertura = devolverSumadorTipoMueble(selectTipoC.value)
-    let factorTipoAntiguedad = devolverfactorAntiguedadVehiculo(selectTipoA.value);
-    let tipoDVehiculo = selectTipoV.value
-    let cobertura = selectTipoC.value
-    let combustible = selectCombustible.value
-    const cotizacionVehiculoSolicitada = new SeguroMueble(factorTipoDeVehiculo, valorDeclarado, año, SumadortipoDeCobertura, factorTipoAntiguedad, cuotaCosto)
-    let cuota = cotizacionVehiculoSolicitada.obtenerValorCuota()
-    let prima = cotizacionVehiculoSolicitada.obtenerPrimaAsegurada()
-    guardarInfoDeSegurosMueblesEnLS(email, marca, modelo, factorTipoDeVehiculo, valorDeclarado, año, SumadortipoDeCobertura, factorTipoAntiguedad, cuotaCosto, prima, cuota, tipoDVehiculo, cobertura, combustible)
-    location.href = "cotizadorSeguroAuto.html"
-}
+// function cotizarSeguro() {
+//     let email = inputEmail.value
+//     let marca = inputMarca.value
+//     let modelo = inputModelo.value
+//     let factorTipoDeVehiculo = devolverFactorTipoMueble(selectTipoV.value)
+//     let valorDeclarado = parseFloat(inputValor.value)
+//     let año = parseInt(inputAño.value)
+//     let SumadortipoDeCobertura = devolverSumadorTipoMueble(selectTipoC.value)
+//     let factorTipoAntiguedad = devolverfactorAntiguedadVehiculo(selectTipoA.value);
+//     let tipoDVehiculo = selectTipoV.value
+//     let cobertura = selectTipoC.value
+//     let combustible = selectCombustible.value
+//     const cotizacionVehiculoSolicitada = new SeguroMueble(factorTipoDeVehiculo, valorDeclarado, año, SumadortipoDeCobertura, factorTipoAntiguedad, cuotaCosto)
+//     let cuota = cotizacionVehiculoSolicitada.obtenerValorCuota()
+//     let prima = cotizacionVehiculoSolicitada.obtenerPrimaAsegurada()
+//     guardarInfoDeSegurosMueblesEnLS(email, marca, modelo, factorTipoDeVehiculo, valorDeclarado, año, SumadortipoDeCobertura, factorTipoAntiguedad, cuotaCosto, prima, cuota, tipoDVehiculo, cobertura, combustible)
+//     location.href = "cotizadorSeguroAuto.html"
+// }
 
 
 // EVENTOS
@@ -185,7 +213,7 @@ btnCalcular.addEventListener("click", ()=> {
     let resultado8 = selectTipoC.value;
     let resultado9 = selectCombustible.value; 
     if (resultado1 !== "" && resultado2 !== "" && resultado3 !== "" && resultado4 !== "" && resultado5 !== "" && resultado6 !== "Seleccionar..." && resultado7 !== "Seleccionar..." && resultado8 !== "Seleccionar..." && resultado9 !== "Seleccionar...") {
-        cotizarSeguro()
+        atraparValoresConEventoSubmitYCotizar()
     }
     else {
         Swal.fire({

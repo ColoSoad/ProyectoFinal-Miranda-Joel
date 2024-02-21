@@ -65,38 +65,40 @@
     </header>
     <div class="div-father">
         <div class="div-cotizador">
-            <label class="prest" for="email">Email:</label>
-            <input type="email" id="email" required>
-            <label class="prest" for="marca">Marca:</label>
-            <input type="email" id="marca" required>
-            <label class="prest" for="modelo">Modelo:</label>
-            <input type="email" id="modelo" required>
-            <label class="prest" for="año">Año:</label>
-            <input type="number" id="año" required>
-            <label class="prest" for="valor">Valor a declarar:</label>
-            <input type="number" id="valor" required>
-            <label for="tipo">Tipo de combustible</label>
-            <select id="combustible">
-                <option selected disabled>Seleccionar...</option>
-                <option>Gasolina</option>
-                <option>Diesel</option>
-                <option>Gnc</option>
-            </select>
-            <label for="tipo">Tipo de vehiculo</label>
-            <select id="tipoV">
-                <option selected disabled>Seleccionar...</option>
-            </select>
-            <label for="tipo">Antiguedad</label>
-            <select id="tipoA">
-                <option selected disabled>Seleccionar...</option>
-            </select>
-            <label for="cobertura">Tipo de cobertura:</label>
-            <select id="tipoC">
-                <option selected disabled>Seleccionar...</option>
-            </select>
-            <div class="btnCalcularYCotizar center separador">
-                <button class="btnCalcular button button-outline">Cotizar</button>
-            </div>
+            <form action="" id="form">
+                <label class="prest" for="email">Email:</label>
+                <input type="email" id="email" required>
+                <label class="prest" for="marca">Marca:</label>
+                <input type="text" id="marca" required>
+                <label class="prest" for="modelo">Modelo:</label>
+                <input type="text" id="modelo" required>
+                <label class="prest" for="año">Año:</label>
+                <input type="number" id="año" required>
+                <label class="prest" for="valor">Valor a declarar:</label>
+                <input type="number" id="valor" required>
+                <label for="tipo">Tipo de combustible</label>
+                <select id="combustible">
+                    <option selected disabled>Seleccionar...</option>
+                    <option>Gasolina</option>
+                    <option>Diesel</option>
+                    <option>Gnc</option>
+                </select>
+                <label for="tipo">Tipo de vehiculo</label>
+                <select id="tipoV">
+                    <option selected disabled>Seleccionar...</option>
+                </select>
+                <label for="tipo">Antiguedad</label>
+                <select id="tipoA">
+                    <option selected disabled>Seleccionar...</option>
+                </select>
+                <label for="cobertura">Tipo de cobertura:</label>
+                <select id="tipoC">
+                    <option selected disabled>Seleccionar...</option>
+                </select>
+                <div class="btnCalcularYCotizar center separador">
+                    <button type="submit" class="btnCalcular button button-outline">Cotizar</button>
+                </div>
+            </form>
         </div>
     </div>
     <a href="#" class="subir"><i class="fa-solid fa-chevron-up"></i></a>

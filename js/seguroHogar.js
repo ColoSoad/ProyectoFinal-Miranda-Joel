@@ -107,32 +107,40 @@ function guardarInfoDeSegurosInmueblesEnLS(email, TipoDeInmueble, InmuebleTipo, 
     localStorage.setItem("informacionDelSeguroDeHogar", JSON.stringify(informacionDelSeguroDeHogar))
 }
 
-// FUNCION PARA COTIZAR SEGURO DE HOGAR EN CUOTAS/MES
-// SE DEFINEN VARIABLES LOCALES PARA ATRAPAR LOS DATOS. LOS DATOS QUE LA CLASE NECESITA EN FORMATO NUMERO SE TRANSFORMARON CON 
-// 'parseInt()' LUEGO SE INSTANCIA A LA CLASE 'SeguroInmueble' PASANDOLE LOS VALORES CORRESPONDIENTES Y SE CREA VARIABLE LOCAL CON EL
-// VALOR DE EL METODO DE LA CLASE. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 'location' CON EL
-// METODO 'href' PARA REDIRECCIONAR LA PÁGINA A 'cotizadorHogar.html' :
-function cotizarSeguro() {
-    let email = inputEmail.value
-    let TipoDeInmueble = devolverFactorTipoInmueble(selectTipoDeInmueble.value)
-    let InmuebleTipo = selectTipoDeInmueble.value
-    let UbicacionGeo = selectUbicacion.value
-    let Ubicacion = devolverFactorUbicacion(selectUbicacion.value)
-    let mts2 = parseInt(inputMts2.value)
-    const cotizacionSolicitada = new SeguroInmueble(email, TipoDeInmueble, Ubicacion, mts2, costoM2)
-    let cuota = cotizacionSolicitada.obtenerCotizacionInmueble()
-    guardarInfoDeSegurosInmueblesEnLS(email, TipoDeInmueble, InmuebleTipo, UbicacionGeo, Ubicacion, mts2, costoM2, cuota);
-    location.href = "cotizadorSeguroInmueble.html"
+
+// // FUNCION PARA  CAPTURAR DATOS MEDIANTE EL EVENTO "submit" Y COTIZAR SEGURO
+// SE DEFINEN VARIABLES LOCALES PARA ATRAPAR LOS DATOS, LOS DATOS QUE LA CLASE NECESITA EN FORMATO NUMERO SE TRANSFORMARON CON 
+// 'parseInt()' LUEGO SE INSTANCIA A LA CLASE 'cotizacionSolicitada' PASANDOLE LOS VALORES CORRESPONDIENTES Y SE CREA VARIABLE 
+// LOCAL CON EL VALOR DE EL METODO DE LA CLASE INSTANCIADA. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 
+// 'location' CON EL ATRIBUTO 'href' PARA REDIRECCIONAR LA PÁGINA A 'cotizadorSeguroInmueble.html' :
+function atraparValoresConEventoSubmitYCotizar(){
+    const formulario = document.querySelector("form");
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        let email = inputEmail.value;
+        let TipoDeInmueble = devolverFactorTipoInmueble(selectTipoDeInmueble.value);
+        let InmuebleTipo = selectTipoDeInmueble.value
+        let UbicacionGeo = selectUbicacion.value
+        let Ubicacion = devolverFactorUbicacion(selectUbicacion.value)
+        let mts2 = parseInt(inputMts2.value)
+        const cotizacionSolicitada = new SeguroInmueble(email, TipoDeInmueble, Ubicacion, mts2, costoM2)
+        let cuota = cotizacionSolicitada.obtenerCotizacionInmueble()
+        guardarInfoDeSegurosInmueblesEnLS(email, TipoDeInmueble, InmuebleTipo, UbicacionGeo, Ubicacion, mts2, costoM2, cuota);
+        location.href = "cotizadorSeguroInmueble.html"
+    })
 }
 
-// EVENTOS
+
+// EVENTO "click" PARA VALIDAR POR SEGUNDA VEZ LA CORRECTA ENTRADA DE DATOS EN LOS INPUTS DEL FORM, SI VA POR EL CAMINO FELIZ
+// LLAMA A LA FUNCION QUE UTILIZA EL EVENTO "submit" Y LA MISMA REEDIRECCIONA AL HTML CORRESPONDIENTE, SI VA POR EL CAMINO TRISTE
+// MUESTRA UN MSJ DE INFORMACION MEDIANTE EL USO DE LIBRERIA "SweetAlert2":
 btnCotizar.addEventListener("click", ()=> {
     let resultado = selectTipoDeInmueble.value;
     let resultado2 = inputEmail.value;
     let resultado3 = selectUbicacion.value
     let resultado4 = inputMts2.value
     if (resultado !== 'Seleccionar...' && resultado2 !== "" && resultado3 !== 'Seleccionar...' && resultado4 !== "0") {
-        cotizarSeguro()
+        atraparValoresConEventoSubmitYCotizar()
     }
     else {
         Swal.fire({

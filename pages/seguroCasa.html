@@ -65,21 +65,23 @@
     </header>
     <div class="div-father">
         <div class="div-cotizador">
-            <label class="prest" for="email">Ingrese su e-mail:</label>
-            <input type="email" id="email" required>
-            <label for="tipoDeInmueble">Tipo de propiedad</label>
-            <select id="tipoDeInmueble">
-                <option selected disabled>Seleccionar...</option>
-            </select>
-            <label for="ubicacion">Ubicación</label>
-            <select id="ubicacion">
-                <option selected disabled>Seleccionar...</option>
-            </select>
-            <label for="Mts2">m²</label>
-            <input type="number" id="Mts2" value="0" min="20" max="500" step="5" required>
-            <div class="btnCalcularYCotizar center separador">
-                <button type="button" class="btnCotizar button button-outline">COTIZAR</button>
-            </div>
+            <form action="" id="form">
+                <label class="prest" for="email">Ingrese su e-mail:</label>
+                <input type="email" id="email" required>
+                <label for="tipoDeInmueble">Tipo de propiedad</label>
+                <select id="tipoDeInmueble" required="true">
+                    <option selected>Seleccionar...</option>
+                </select>
+                <label for="ubicacion">Ubicación</label>
+                <select id="ubicacion" required="true">
+                    <option selected>Seleccionar...</option>
+                </select>
+                <label for="Mts2">m²</label>
+                <input type="number" id="Mts2" value="0" min="20" max="500" step="5" required>
+                <div class="btnCalcularYCotizar center separador">
+                    <button type="submit" class="btnCotizar button button-outline">COTIZAR</button>
+                </div>
+            </form>
         </div>
     </div>
     <a href="#" class="subir"><i class="fa-solid fa-chevron-up"></i></a>

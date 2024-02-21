@@ -112,7 +112,7 @@ btnCalcular.addEventListener("click", ()=> {
     let resultado2 = inputEmail.value;
     let resultado3 = inputMontoASolicitar.value;
     let resultado4 = inputCantidadDeCuota.value;
-    if (resultado !== 'Elige aquí...' && resultado2 !== "" && resultado3 !== "0" && resultado4 !== "0") {
+    if (resultado !== "Elige aquí..." && resultado2 !== "" && resultado3 !== "0" && resultado4 !== "0") {
         atraparValoresConEventoSubmit()
     }
     else {
@@ -122,7 +122,6 @@ btnCalcular.addEventListener("click", ()=> {
             icon: "error",
         });
     }
-
 })
 
 // CODIGO AUTOEJECUTABLE
