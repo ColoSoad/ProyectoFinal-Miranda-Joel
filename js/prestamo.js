@@ -1,15 +1,16 @@
 // ENLACES AL DOM
-const inputEmail = document.querySelector("input#email")
-const inputMontoASolicitar = document.querySelector("input#montoASolicitar")
-const inputCantidadDeCuota = document.querySelector("input#cantidadDeCuota")
-const selectTipoDeInteres = document.querySelector("select#tipoDeInteres")
-const btnCalcular = document.querySelector("button.btnCalcular")
-const contenedor = document.querySelector("div.div-father")
+const inputEmail = document.querySelector("input#email");
+const inputMontoASolicitar = document.querySelector("input#montoASolicitar");
+const inputCantidadDeCuota = document.querySelector("input#cantidadDeCuota");
+const selectTipoDeInteres = document.querySelector("select#tipoDeInteres");
+const btnCalcular = document.querySelector("button.btnCalcular");
+const contenedor = document.querySelector("div.div-father");
+const formulario = document.querySelector("form");
 
 // VARIABLES GLOBALES, ARRAYS Y ARRAYS DE OBJETOS LITERALES
 
-const URL = "../creditos.json"
-const tiposDeCreditos = []
+const URL = "../creditos.json";
+const tiposDeCreditos = [];
 
 
 // FUNCIONES 'CARGAR TIPO DE INTERES'
@@ -25,7 +26,7 @@ function cargartipoDeInteres(tiposDeCreditos) {
     else {
         contenedor.innerHTML = retornarError()
     }
-}
+};
 
 //FUNCION PARA RETORNAR ERROR
 function retornarError() {
@@ -36,7 +37,7 @@ function retornarError() {
                 <h3 class="textos3">No se ha podido cargar la información</h3>
                 <h4 class="textos3">Intenta nuevamente en unos instantes...</h4>
             </div>`
-}
+};
 
 //FUNCION ASINCRONICA PARA OBTENER INTERESES DE LOS TIPOS DE CREDITOS CON FETCH:
 function obtenerIntereses() {
@@ -54,7 +55,7 @@ function obtenerIntereses() {
         contenedor.innerHTML = retornarError()
     })
     
-}
+};
 
 // FUNCION PARA DEVOLVER EL FACTOR MULTIPLICADOR QUE VA A REPRESENTAR EL INTERÉS DEL CREDITO SELECCIONADO
 // ES UNA FUNCION QUE RECIBE UN ARGUMENTO (tipoDelCredito) Y DENTRO DE LA ESTRUCTURA DEFINE UNA VARIABLE LOCAL PARA
@@ -63,7 +64,7 @@ function obtenerIntereses() {
 function devolverIntereses(tipoDelCredito) {
     let creditoTipo = tiposDeCreditos.find((creditoTipo)=> creditoTipo.tipoDelCredito === tipoDelCredito)
     return creditoTipo ? creditoTipo.interes : 0;
-}
+};
 
 // FUNCION QUE RECIBE COMO PARAMETROS 5 ARGUMENTOS Y CREA UN OBJETO LITERAL LLAMADO 'informacionDelPrestamo'
 // PARA PODER ALMACENARLO EN EL NAVEGADOR MEDIANTE 'localStorage', LS NO PERMITE DATOS EN FORMATO DE OBJETOS, YA QUE SE PROCEDE
@@ -78,7 +79,7 @@ function guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeC
         cuota: cuota
     }
     localStorage.setItem("informacionDelPrestamo", JSON.stringify(informacionDelPrestamo))
-}
+};
 
 // // FUNCION PARA  CAPTURAR DATOS MEDIANTE EL EVENTO "submit" Y CALCULAR CUOTAS
 // SE DEFINEN VARIABLES LOCALES PARA ATRAPAR LOS DATOS, LOS DATOS QUE LA CLASE NECESITA EN FORMATO NUMERO SE TRANSFORMARON CON 
@@ -86,14 +87,13 @@ function guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeC
 // DE EL METODO DE LA CLASE INSTANCIADA. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 'location' CON EL
 // ATRIBUTO 'href' PARA REDIRECCIONAR LA PÁGINA A 'calculadorPrestamo.html' :
 function atraparValoresConEventoSubmit(){
-    const formulario = document.querySelector("form");
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         let email = inputEmail.value;
         let montoASolicitar = parseInt(inputMontoASolicitar.value);
         let cantidadDeCuota = parseInt(inputCantidadDeCuota.value);
         let tipoDeIntereses = (devolverIntereses(selectTipoDeInteres.value)-1)*100;
-        const divisor = 12
+        const divisor = 12;
         let factorCuotas = cantidadDeCuota / divisor;
         let interesCalculado = tipoDeIntereses*factorCuotas;
         let tipoDeInteres = (interesCalculado +100)/100;
@@ -102,7 +102,16 @@ function atraparValoresConEventoSubmit(){
         guardarInfoDePrestamoEnLocalStorage(email, montoASolicitar, cantidadDeCuota, tipoDeInteres, tipoDeIntereses, cuota);
         location.href = "calculadorPrestamo.html"
     })
-}
+};
+
+//FUNCION PARA CUANDO EL EVENTO SUBMIT VAYA POR ELSE DE LA VALIDACIÓN DEL EVENTO CLICK, AL NO LLENARSE EL "Select", X ENDE, 
+// EL VALOR DE "select.value" será de "Elige aquí..." IRA POR ELSE PERO EL EVENTO SUBMIT SE LE ASIGNA EL ATRIBUTO "preventDefault()",
+// Y DE ESTE MODO ARROJA EL ERROR VISUALIZADO POR SweetAlert:
+function validarSelectPorElse(){
+    form.addEventListener("submit", (event) => {
+    event.preventDefault();
+})
+};
 
 // EVENTO "click" PARA VALIDAR POR SEGUNDA VEZ LA CORRECTA ENTRADA DE DATOS EN LOS INPUTS DEL FORM, SI VA POR EL CAMINO FELIZ
 // LLAMA A LA FUNCION QUE UTILIZA EL EVENTO "submit" Y LA MISMA REEDIRECCIONA AL HTML CORRESPONDIENTE, SI VA POR EL CAMINO TRISTE
@@ -121,8 +130,9 @@ btnCalcular.addEventListener("click", ()=> {
             text: "Por Favor! Ingrese datos válidos",
             icon: "error",
         });
+        validarSelectPorElse()
     }
-})
+});
 
 // CODIGO AUTOEJECUTABLE
 obtenerIntereses()

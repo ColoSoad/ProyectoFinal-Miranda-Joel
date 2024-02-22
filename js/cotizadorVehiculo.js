@@ -1,26 +1,26 @@
 // ENLACES AL DOM
-const spanMarca = document.querySelector("span.label-marca")
-const spanModelo = document.querySelector("span.label-modelo") 
-const spanAño = document.querySelector("span.label-año")
-const spanTipo = document.querySelector("span.label-tipo")
-const spanCombustible = document.querySelector("span.label-combustible")
-const spanCobertura = document.querySelector("span.label-cobertura")
-const spanPrima = document.querySelector("span.label-prima")
-const spanCuota = document.querySelector("span.label-cuota")
-const btnContratar = document.querySelector("button.button-contratar")
-let email = ""
+const spanMarca = document.querySelector("span.label-marca");
+const spanModelo = document.querySelector("span.label-modelo") ;
+const spanAño = document.querySelector("span.label-año");
+const spanTipo = document.querySelector("span.label-tipo");
+const spanCombustible = document.querySelector("span.label-combustible");
+const spanCobertura = document.querySelector("span.label-cobertura");
+const spanPrima = document.querySelector("span.label-prima");
+const spanCuota = document.querySelector("span.label-cuota");
+const btnContratar = document.querySelector("button.button-contratar");
+let email = "";
 
 // FUNCION PARA RECUPERAR DATOS DE LS
 // MEDIANTE UN OBJETO LITERAL LLAMADO 'infoDelSeguro' RECUPERAMOS LOS DATOS ALMACENADOS EN EL NAVEGADOR
 function recuperarInformacionDeLocalStorage() {
     const infoDelSeguro = JSON.parse(localStorage.getItem("informacionDelSeguroDeVehiculo"))
     if (infoDelSeguro !== "" && infoDelSeguro !== null) {
-        spanMarca.textContent = infoDelSeguro.marca
-        spanModelo.textContent = infoDelSeguro.modelo
+        spanMarca.textContent = infoDelSeguro.marca.toUpperCase()
+        spanModelo.textContent = infoDelSeguro.modelo.toUpperCase()
         spanAño.textContent = infoDelSeguro.año
-        spanTipo.textContent = infoDelSeguro.tipoDVehiculo
-        spanCombustible.textContent = infoDelSeguro.combustible
-        spanCobertura.textContent = infoDelSeguro.cobertura
+        spanTipo.textContent = infoDelSeguro.tipoDVehiculo.toUpperCase()
+        spanCombustible.textContent = infoDelSeguro.combustible.toUpperCase()
+        spanCobertura.textContent = infoDelSeguro.cobertura.toUpperCase()
         spanPrima.textContent = parseFloat(infoDelSeguro.prima.toFixed(2)).toLocaleString("es-AR")
         spanCuota.textContent = parseFloat(infoDelSeguro.cuota.toFixed(2)).toLocaleString("es-AR")
         email = infoDelSeguro.email
@@ -28,12 +28,12 @@ function recuperarInformacionDeLocalStorage() {
     else {
         location.href = "./seguroAutomovil.html"
     }    
-}
+};
 
 // FUNCION PARA REFRESCAR PÁGINA DE CONTRATAR SERVICIO, PARA QUE SE REEDIRECCIONE AL SITIO "./seguroAutomovil.html"
 function refrescarPagina(){
     location.reload(true);
-}
+};
 
 //EVENTOS
 
@@ -61,7 +61,7 @@ btnContratar.addEventListener("click", ()=> {
             }, 5000)
         }
     })
-})
+});
 
 // CODIGO AUTOEJECUTABLE
 recuperarInformacionDeLocalStorage()

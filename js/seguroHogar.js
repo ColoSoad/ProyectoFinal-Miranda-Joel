@@ -1,18 +1,19 @@
 // ENLACES AL DOM
-const inputEmail = document.querySelector("input#email")
-const selectTipoDeInmueble = document.querySelector("select#tipoDeInmueble")
-const selectUbicacion = document.querySelector("select#ubicacion")
-const inputMts2 = document.querySelector("input#Mts2")
-const btnCotizar = document.querySelector("button.btnCotizar")
-const btnInicio = document.querySelector("a#inicio")
-const contenedor = document.querySelector("div.div-father")
+const inputEmail = document.querySelector("input#email");
+const selectTipoDeInmueble = document.querySelector("select#tipoDeInmueble");
+const selectUbicacion = document.querySelector("select#ubicacion");
+const inputMts2 = document.querySelector("input#Mts2");
+const btnCotizar = document.querySelector("button.btnCotizar");
+const btnInicio = document.querySelector("a#inicio");
+const contenedor = document.querySelector("div.div-father");
+const formulario = document.querySelector("form");
 
 // VARIABLES GLOBALES, ARRAYS Y ARRAYS DE OBJETOS LITERALES
-const URL = "../seguroTipoInmueble.json"
-const URL2 = "../seguroUbicacionInmueble.json"
-const inmueblesTipo = []
-const inmuebleUbicacion =  []
-const costoM2 = 221.02
+const URL = "../seguroTipoInmueble.json";
+const URL2 = "../seguroUbicacionInmueble.json";
+const inmueblesTipo = [];
+const inmuebleUbicacion = [];
+const costoM2 = 221.02;
 
 
 // FUNCIONES 'CARGAR TIPO DE INMUEBLE Y UBICACION'
@@ -25,7 +26,7 @@ function cargartipoDeInmuebleYUbicacion() {
             selectUbicacion.innerHTML += `<option>${factorUbicacion.tipo2}</option>`
         })    
     }
-}
+};
 
 
 //FUNCION PARA RETORNAR ERROR
@@ -37,7 +38,7 @@ function retornarError() {
                 <h3 class="textos3">No se ha podido cargar la información</h3>
                 <h4 class="textos3">Intenta nuevamente en unos instantes...</h4>
             </div>`
-}
+};
 
 
 //FUNCION ASINCRONICA PARA OBTENER FACTORES DE LOS TIPOS DE INMUEBLES Y UBICACIÓN CON FETCH:
@@ -69,7 +70,7 @@ function obtenerFactores() {
         contenedor.innerHTML = retornarError()
     })
     
-}
+};
 
 
 // FUNCION PARA DEVOLVER EL FACTOR MULTIPLICADOR DE SU TIPO DE VIVIENDA.
@@ -79,7 +80,7 @@ function obtenerFactores() {
 function devolverFactorTipoInmueble(tipo) {
     let factorTipo = inmueblesTipo.find((factorTipo)=> factorTipo.tipo === tipo)
     return factorTipo.factor
-}
+};
 
 // FUNCION PARA DEVOLVER EL FACTOR MULTIPLICADOR DE SU UBICACION.
 // ES UNA FUNCION QUE RECIBE UN ARGUMENTO (tipo2) Y DENTRO DE LA ESTRUCTURA DEFINE UNA VARIABLE LOCAL PARA
@@ -88,7 +89,7 @@ function devolverFactorTipoInmueble(tipo) {
 function devolverFactorUbicacion(tipo2) {
     let factorUbicacionTipo = inmuebleUbicacion.find((factorUbicacionTipo)=> factorUbicacionTipo.tipo2 === tipo2)
     return factorUbicacionTipo.factorUbicacion
-}
+};
 
 // FUNCION QUE RECIBE COMO PARAMETROS 6 ARGUMENTOS Y CREA UN OBJETO LITERAL LLAMADO 'informacionDelSeguroDeHogar'
 // PARA PODER ALMACENARLO EN EL NAVEGADOR MEDIANTE 'localStorage'. LS NO PERMITE DATOS EN FORMATO DE OBJETOS, YA QUE SE PROCEDE
@@ -105,7 +106,7 @@ function guardarInfoDeSegurosInmueblesEnLS(email, TipoDeInmueble, InmuebleTipo, 
         cuota: cuota
     }
     localStorage.setItem("informacionDelSeguroDeHogar", JSON.stringify(informacionDelSeguroDeHogar))
-}
+};
 
 
 // // FUNCION PARA  CAPTURAR DATOS MEDIANTE EL EVENTO "submit" Y COTIZAR SEGURO
@@ -114,7 +115,6 @@ function guardarInfoDeSegurosInmueblesEnLS(email, TipoDeInmueble, InmuebleTipo, 
 // LOCAL CON EL VALOR DE EL METODO DE LA CLASE INSTANCIADA. LUEGO GUARDAMOS LA INFO EN EL NAVEGADOR WEB CON LS Y USAMOS EL OBJETO 
 // 'location' CON EL ATRIBUTO 'href' PARA REDIRECCIONAR LA PÁGINA A 'cotizadorSeguroInmueble.html' :
 function atraparValoresConEventoSubmitYCotizar(){
-    const formulario = document.querySelector("form");
     form.addEventListener("submit", (event) => {
         event.preventDefault();
         let email = inputEmail.value;
@@ -128,7 +128,16 @@ function atraparValoresConEventoSubmitYCotizar(){
         guardarInfoDeSegurosInmueblesEnLS(email, TipoDeInmueble, InmuebleTipo, UbicacionGeo, Ubicacion, mts2, costoM2, cuota);
         location.href = "cotizadorSeguroInmueble.html"
     })
-}
+};
+
+//FUNCION PARA CUANDO EL EVENTO SUBMIT VAYA POR ELSE DE LA VALIDACIÓN DEL EVENTO CLICK, AL NO LLENARSE EL "Select", X ENDE, 
+// EL VALOR DE "select.value" será de "Elige aquí..." IRA POR ELSE PERO EL EVENTO SUBMIT SE LE ASIGNA EL ATRIBUTO "preventDefault()",
+// Y DE ESTE MODO ARROJA EL ERROR VISUALIZADO POR SweetAlert:
+function validarSelectPorElse(){
+    form.addEventListener("submit", (event) => {
+    event.preventDefault();
+})
+};
 
 
 // EVENTO "click" PARA VALIDAR POR SEGUNDA VEZ LA CORRECTA ENTRADA DE DATOS EN LOS INPUTS DEL FORM, SI VA POR EL CAMINO FELIZ
@@ -137,8 +146,8 @@ function atraparValoresConEventoSubmitYCotizar(){
 btnCotizar.addEventListener("click", ()=> {
     let resultado = selectTipoDeInmueble.value;
     let resultado2 = inputEmail.value;
-    let resultado3 = selectUbicacion.value
-    let resultado4 = inputMts2.value
+    let resultado3 = selectUbicacion.value;
+    let resultado4 = inputMts2.value;
     if (resultado !== 'Seleccionar...' && resultado2 !== "" && resultado3 !== 'Seleccionar...' && resultado4 !== "0") {
         atraparValoresConEventoSubmitYCotizar()
     }
@@ -148,8 +157,9 @@ btnCotizar.addEventListener("click", ()=> {
             text: "Por Favor! Ingrese datos válidos",
             icon: "error"
         });
+        validarSelectPorElse()
     }
-})
+});
 
 // CODIGO AUTOEJECUTABLE
 obtenerFactores()
