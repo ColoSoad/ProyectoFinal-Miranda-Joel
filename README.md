@@ -22,15 +22,21 @@
     - Carpeta img
     - Carpeta js
     - Carpeta pages
+    - Archivo creditos.json
     - Archivo index.html
-    - README.txt (Detalle de contenido y desarrollo) 
+    - README.txt (Detalle de contenido y desarrollo)
+    - Archivo seguroAutoAntiguedad.json
+    - Archivo seguroAutoCobertura.json
+    - Archivo seguroAutoTipo.json
+    - Archivo seguroTipoInmueble.json
+    - Archivo seguroUbicacionInmueble.json
 
 # Descripción
 
      Aplicación simulador de creditos personales y prendarios. Cotizador de seguros de inmuebles y vehículos.
 
      Todo el código se encuentra indentado 4 espacios a la derecha, prolijo y con comentarios especificando línea 
-    de código.
+     de código.
 
      En gitHub está el repositorio y el link para visualizar el proyecto. ( https://colosoad.github.io/ProyectoFinal-Miranda-Joel/ )
 
@@ -47,9 +53,10 @@
     ✅ Operadores ternarios.
     ✅ Notificación de resultados y/ o errores con SweetAlert.
     ✅ Interacción absoluta con usuario.
-    ✅ Eventos "click" y "mousemove".
-    ✅ Modificación de html con js mediante enlaces al DOM.
+    ✅ Eventos "click", "Submit" y "mousemove".
+    ✅ Modificación de html con js mediante enlaces al DOM e InnerHTML.
     ✅ Uso de información media JSON locaStorage y eliminacion de la misma cuando se finaliza su propio uso.
+    ✅ Funciones asincrónicas y uso de fetch.
 
 
 # M i r a n d a _ J o e l _ C o m i s i o n _ 4 9 8 4 0
